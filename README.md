@@ -19,49 +19,49 @@ $GOROOT/src/pkg/github.com/thekvs/go-net-radix
 package main
 
 import (
-    "github.com/thekvs/go-net-radix"
+        "github.com/thekvs/go-net-radix"
 
-    "fmt"
-    "log"
+        "fmt"
+        "log"
 )
 
 func main() {
-    rtree, err := netradix.NewNetRadixTree()
-    if err != nil {
+        rtree, err := netradix.NewNetRadixTree()
+        if err != nil {
         panic(err)
-    }
-    defer rtree.Close()
+        }
+        defer rtree.Close()
 
-    if err = rtree.Add("217.72.192.0/20", "UDATA1"); err != nil {
-        log.Fatal(err)
-    }
+        if err = rtree.Add("217.72.192.0/20", "UDATA1"); err != nil {
+                log.Fatal(err)
+        }
 
-    if err = rtree.Add("2001:220::/35", "UDATA2"); err != nil {
-        log.Fatal(err)
-    }
+        if err = rtree.Add("2001:220::/35", "UDATA2"); err != nil {
+                log.Fatal(err)
+        }
 
-    var found bool
-    var udata string
+        var found bool
+        var udata string
 
-    found, udata, err = rtree.SearchBest("217.72.192.2")
-    if err != nil {
-        log.Fatal(err)
-    }
-    if found {
-        fmt.Printf("found: %v\n", udata)
-    }
+        found, udata, err = rtree.SearchBest("217.72.192.2")
+        if err != nil {
+                log.Fatal(err)
+        }
+        if found {
+                fmt.Printf("found: %v\n", udata)
+        }
 
-    found, udata, err = rtree.SearchBest("2001:220::")
-    if err != nil {
-        log.Fatal(err)
-    }
-    if found {
-        fmt.Printf("found: %v\n", udata)
-    }
+        found, udata, err = rtree.SearchBest("2001:220::")
+        if err != nil {
+                log.Fatal(err)
+        }
+        if found {
+                fmt.Printf("found: %v\n", udata)
+        }
 
-    if err = rtree.Remove("217.72.192.0/20"); err != nil {
-        log.Fatal(err)
-    }
+        if err = rtree.Remove("217.72.192.0/20"); err != nil {
+                log.Fatal(err)
+        }
 }
 
 ```
