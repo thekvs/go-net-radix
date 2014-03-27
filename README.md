@@ -1,12 +1,19 @@
 [![Build Status](https://travis-ci.org/thekvs/go-net-radix.svg?branch=master)](https://travis-ci.org/thekvs/go-net-radix)
+## About
 
-About
-=====
+Go bindings to radix tree library for fast subnet (both IPv4 and IPv6) lookups.
 
-Go bindings to radix tree library for fast subnet (IPv4 and IPv6) lookups.
+## Installing
+```
+$ go get github.com/thekvs/go-net-radix
+```
 
-Basic usage example
-===================
+After this command *go-net-radix* library is ready to use and will be located in:
+```
+    $GOROOT/src/pkg/github.com/thekvs/go-net-radix
+```
+
+## Basic usage example
 ```go
 
 package main
@@ -59,8 +66,7 @@ func main() {
 
 ```
 
-Licensing
-=========
+## Licensing
 
 All source code included in this distribution is covered by the MIT License found in the LICENSE file,
 unless specifically stated otherwise within each file.
