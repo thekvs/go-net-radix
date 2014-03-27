@@ -10,7 +10,7 @@ $ go get github.com/thekvs/go-net-radix
 
 After this command *go-net-radix* library is ready to use and will be located in:
 ```
-    $GOROOT/src/pkg/github.com/thekvs/go-net-radix
+$GOROOT/src/pkg/github.com/thekvs/go-net-radix
 ```
 
 ## Basic usage example
