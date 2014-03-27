@@ -3,8 +3,8 @@ About
 
 Go bindings to radix tree library for fast subnet (IPv4 and IPv6) lookups.
 
-Usage example
-=============
+Basic usage example
+===================
 ```go
 
 package main
