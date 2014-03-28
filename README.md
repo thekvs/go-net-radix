@@ -28,7 +28,7 @@ import (
 func main() {
         rtree, err := netradix.NewNetRadixTree()
         if err != nil {
-        panic(err)
+                panic(err)
         }
         defer rtree.Close()
 
