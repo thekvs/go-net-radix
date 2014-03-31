@@ -49,7 +49,7 @@ type NetRadixTree struct {
 	tree *C.radix_tree_t
 }
 
-// Creates new NetRadixTree structure.
+// NewNetRadixTree creates new NetRadixTree structure.
 // Return tuple in which the first element specifies tree structure and the second
 // element specifies error object or nil if no error has occured.
 func NewNetRadixTree() (*NetRadixTree, error) {
@@ -61,12 +61,12 @@ func NewNetRadixTree() (*NetRadixTree, error) {
 	return tree, nil
 }
 
-// Destroy radix tree.
+// Close destroys radix tree.
 func (rtree *NetRadixTree) Close() {
 	C.destroy(rtree.tree)
 }
 
-// Add network or subnet specification and user defined payload string to the radix tree.
+// Add adds network or subnet specification and user defined payload string to the radix tree.
 // If no mask width is specified, the longest possible mask is assumed,
 // i.e. 32 bits for IPv4 network and 128 bits for IPv6 network.
 // On success, returns nil, otherwise returns error object.
@@ -85,7 +85,7 @@ func (rtree *NetRadixTree) Add(addr string, udata string) error {
 	return nil
 }
 
-// Searches radix tree to find a matching node using usual subnetting rules
+// SearchBest searches radix tree to find a matching node using usual subnetting rules
 // for the address specified. If no mask width is specified, the longest possible mask
 // for this type of address (IPv4 or IPv6) is assumed.
 // Returns triple in which the first element indicates success of a search,
@@ -106,7 +106,7 @@ func (rtree *NetRadixTree) SearchBest(addr string) (found bool, udata string, er
 	return false, "", nil
 }
 
-// Searches radix tree to find a matching node. Its semantics are the same as in SearchBest()
+// SearchExact searches radix tree to find a matching node. Its semantics are the same as in SearchBest()
 // method except that the addr must match a node exactly.
 func (rtree *NetRadixTree) SearchExact(addr string) (found bool, udata string, err error) {
 	var prefix C.prefix_t
@@ -123,7 +123,7 @@ func (rtree *NetRadixTree) SearchExact(addr string) (found bool, udata string, e
 	return false, "", nil
 }
 
-// Removes a node which exactly matches the address given.
+// Remove deletes a node which exactly matches the address given.
 // If no errors occured returns nil or error object otherwise.
 func (rtree *NetRadixTree) Remove(addr string) error {
 	var prefix C.prefix_t
