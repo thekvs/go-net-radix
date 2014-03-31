@@ -66,6 +66,10 @@ func main() {
 
 ```
 
+## Documentation
+
+Online documentation can be found on [godoc.org](http://godoc.org/github.com/thekvs/go-net-radix).
+
 ## Licensing
 
 All source code included in this distribution is covered by the MIT License found in the LICENSE file,
