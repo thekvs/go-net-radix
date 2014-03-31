@@ -68,7 +68,7 @@ func main() {
 
 ## Documentation
 
-Online documentation can be found on [godoc.org](http://godoc.org/github.com/thekvs/go-net-radix).
+[![GoDoc](https://godoc.org/github.com/thekvs/go-net-radix?status.png)](https://godoc.org/github.com/thekvs/go-net-radix)
 
 ## Licensing
 
