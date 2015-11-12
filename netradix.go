@@ -70,7 +70,7 @@ func (rtree *NetRadixTree) Close() {
 // If no mask width is specified, the longest possible mask is assumed,
 // i.e. 32 bits for IPv4 network and 128 bits for IPv6 network.
 // On success, returns nil, otherwise returns error object.
-func (rtree *NetRadixTree) Add(addr string, udata string) error {
+func (rtree *NetRadixTree) Add(addr string, udata unsafe.Pointer) error {
 	cstr := C.CString(addr)
 	defer C.free(unsafe.Pointer(cstr))
 
@@ -80,7 +80,7 @@ func (rtree *NetRadixTree) Add(addr string, udata string) error {
 		return errors.New(C.GoString(errmsg))
 	}
 
-	node.data = unsafe.Pointer(C.CString(udata))
+	node.data = udata
 
 	return nil
 }
@@ -91,36 +91,36 @@ func (rtree *NetRadixTree) Add(addr string, udata string) error {
 // Returns triple in which the first element indicates success of a search,
 // the second element returns user payload (or empty string if not found)
 // and the third element returns error object in case such an error occured or nil otherwise.
-func (rtree *NetRadixTree) SearchBest(addr string) (found bool, udata string, err error) {
+func (rtree *NetRadixTree) SearchBest(addr string) (found bool, udata unsafe.Pointer, err error) {
 	var prefix C.prefix_t
 	e := rtree.fillPrefix(&prefix, addr)
 	if e != nil {
-		return false, "", e
+		return false, nil, e
 	}
 
 	node := C.radix_search_best(rtree.tree, &prefix)
 	if node != nil {
-		return true, C.GoString((*C.char)(node.data)), nil
+		return true, node.data, nil
 	}
 
-	return false, "", nil
+	return false, nil, nil
 }
 
 // SearchExact searches radix tree to find a matching node. Its semantics are the same as in SearchBest()
 // method except that the addr must match a node exactly.
-func (rtree *NetRadixTree) SearchExact(addr string) (found bool, udata string, err error) {
+func (rtree *NetRadixTree) SearchExact(addr string) (found bool, udata unsafe.Pointer, err error) {
 	var prefix C.prefix_t
 	e := rtree.fillPrefix(&prefix, addr)
 	if e != nil {
-		return false, "", e
+		return false, nil, e
 	}
 
 	node := C.radix_search_exact(rtree.tree, &prefix)
 	if node != nil {
-		return true, C.GoString((*C.char)(node.data)), nil
+		return true, node.data, nil
 	}
 
-	return false, "", nil
+	return false, nil, nil
 }
 
 // Remove deletes a node which exactly matches the address given.
