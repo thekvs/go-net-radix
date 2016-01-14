@@ -134,7 +134,7 @@ func (rtree *NetRadixTree) Remove(addr string) error {
 
 	node := C.radix_search_exact(rtree.tree, &prefix)
 	if node != nil {
-		C.free(unsafe.Pointer(node.data))
+		//C.free(unsafe.Pointer(node.data))
 		C.radix_remove(rtree.tree, node)
 	}
 
