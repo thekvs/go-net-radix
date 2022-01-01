@@ -70,7 +70,7 @@ func (rtree *NetRadixTree) Close() {
 // If no mask width is specified, the longest possible mask is assumed,
 // i.e. 32 bits for IPv4 network and 128 bits for IPv6 network.
 // On success, returns nil, otherwise returns error object.
-func (rtree *NetRadixTree) Add(addr string, udata string) error {
+func (rtree *NetRadixTree) Add(addr, udata string) error {
 	cstr := C.CString(addr)
 	defer C.free(unsafe.Pointer(cstr))
 

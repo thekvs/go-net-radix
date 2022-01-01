@@ -28,7 +28,8 @@ func TestSearchExact(t *testing.T) {
 		{"195.161.113.74/32", "UDATA3"},
 		{"172.16.2.2", "UDATA4"},
 		{"10.42.0.0/16", "UDATA5"},
-		{"2001:220::/35", "UDATA6"}}
+		{"2001:220::/35", "UDATA6"},
+	}
 
 	for _, value := range initial {
 		if err := rtree.Add(value.network, value.udata); err != nil {
@@ -45,7 +46,8 @@ func TestSearchExact(t *testing.T) {
 		{"10.42.1.0/24", "", false},
 		{"10.42.1.8", "", false},
 		{"2001:220::/128", "", false},
-		{"2001:220::/35", "UDATA6", true}}
+		{"2001:220::/35", "UDATA6", true},
+	}
 
 	for _, value := range expected {
 		status, udata, err := rtree.SearchExact(value.ip)
@@ -76,7 +78,8 @@ func TestSearchBest(t *testing.T) {
 		{"195.161.113.74/32", "UDATA3"},
 		{"172.16.2.2", "UDATA4"},
 		{"10.42.0.0/16", "UDATA5"},
-		{"2001:220::/35", "UDATA6"}}
+		{"2001:220::/35", "UDATA6"},
+	}
 
 	expected := []TestResult{
 		{"217.72.192.1", "UDATA1", true},
@@ -86,7 +89,8 @@ func TestSearchBest(t *testing.T) {
 		{"15.161.13.75", "", false},
 		{"10.42.1.0/24", "UDATA5", true},
 		{"10.42.1.8", "UDATA5", true},
-		{"2001:220::/128", "UDATA6", true}}
+		{"2001:220::/128", "UDATA6", true},
+	}
 
 	for _, value := range initial {
 		if err := rtree.Add(value.network, value.udata); err != nil {
@@ -122,12 +126,14 @@ func TestRemove(t *testing.T) {
 		{"217.72.195.0/24", "UDATA2"},
 		{"195.161.113.74/32", "UDATA3"},
 		{"172.16.2.2", "UDATA4"},
-		{"10.42.0.0/16", "UDATA5"}}
+		{"10.42.0.0/16", "UDATA5"},
+	}
 
 	expected := []TestResult{
 		{"217.72.192.0/20", "UDATA1", true},
 		{"195.161.113.74", "UDATA3", true},
-		{"172.16.2.2", "UDATA4", true}}
+		{"172.16.2.2", "UDATA4", true},
+	}
 
 	for _, value := range initial {
 		if err := rtree.Add(value.network, value.udata); err != nil {
