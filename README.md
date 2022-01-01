@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/thekvs/go-net-radix.svg?branch=master)](https://travis-ci.org/thekvs/go-net-radix)
 ## About
 
 Go programming language (http://golang.org/) bindings for radix tree library for fast subnet (both IPv4 and IPv6) lookups.
